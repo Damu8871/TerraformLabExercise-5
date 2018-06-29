@@ -4,7 +4,7 @@ provider "aws" {
 
 
 resource "aws_s3_bucket" "aws-bucket" {
-  bucket = "lambda-source-up-test"
+  bucket = "${var.s3-source-buc-name}"
   acl    = "private"
 
   tags {
@@ -14,7 +14,7 @@ resource "aws_s3_bucket" "aws-bucket" {
 }
 
 resource "aws_s3_bucket" "aws-dest-bucket" {
-  bucket = "lambda-dest"
+  bucket = "${var.s3-destination-buc-name}"
   acl    = "private"
 
   tags {
@@ -80,7 +80,7 @@ POLICY
 
 
 resource "aws_lambda_function" "demo_lambda" {
-    function_name = "demo_lambda"
+    function_name = "${lambda_name}"
     handler = "test.sample"
     runtime = "python2.7"
     filename = "function.zip"
